@@ -3,6 +3,296 @@
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <style>
+    .question-container {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 30px 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+    /* Question Heading */
+    .question-container h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+    }
+    /* Options container */
+    .options {
+      margin: 20px 0;
+    }
+    /* Each Option styling */
+    .option {
+      display: block;
+      background-color: #f9f9f9;
+      border: 2px solid transparent;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #333;
+      transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .option:hover {
+      background-color: #f1f1f1;
+      border-color: #66a6ff;
+      transform: scale(1.02);
+    }
+    .option input {
+      display: none;
+    }
+    /* Result message styling */
+    .result {
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .result.show {
+      opacity: 1;
+    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .question-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .question-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .question-text {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .option {
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--secondary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .option:hover::before {
+            transform: scaleY(1);
+        }
+
+        .option-label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .option-text {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+
+        /* Numbering Styles */
+        .question-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 1rem;
+            font-weight: 700;
+        }
+
+        /* Different Color Variations */
+        .option:nth-child(1) { --option-color: #3498db; }
+        .option:nth-child(2) { --option-color: #e74c3c; }
+        .option:nth-child(3) { --option-color: #2ecc71; }
+        .option:nth-child(4) { --option-color: #f1c40f; }
+
+        .option:hover {
+            border-color: var(--option-color);
+        }
+
+        .option:hover::before {
+            background: var(--option-color);
+        }
+    .navbar {
+      background-color: #494D61;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .navbar .social-icons a {
+      margin: 0 5px;
+    }
+    /* Optional: set a max-width on the images for aesthetics */
+    .navbar img {
+      height: 24px;
+      width: auto;
+      vertical-align: middle;
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    /* Floating button styles */
+    .dark-mode-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 18px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .dark-mode-btn:hover {
+      background: #555;
+    }
+                  .download-holder {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+                .download-title {
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .download-description {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .download-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .download-button:hover {
+            background: #2980b9;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        
+        .file-info span {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-info i {
+            margin-right: 5px;
+            font-style: normal;
+        }
+      .minimal-card {
+            border-left: 4px solid #3498db;
+        }
+        .hologrid-hr {
+            border: none;
+            height: 10px;
+            background: 
+                linear-gradient(90deg, transparent, rgba(0,255,255,0.7), transparent),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 15px,
+                    rgba(0,255,255,0.3) 15px,
+                    rgba(0,255,255,0.3) 20px
+                );
+            animation: grid-move 10s linear infinite;
+            filter: drop-shadow(0 0 2px #00ffff);
+            margin: 30px 0;
+        }
+
+        @keyframes grid-move {
+            to { background-position: 100px 0; }
+        }
+
 .crystal-border {
   padding: 60px;
   margin: 60px;
@@ -127,7 +417,56 @@
             to { background-position: 40px 0; }
         }
 
-
+        .floating-card {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .material-design {
+            border-top: 4px solid #8e44ad;
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        }
+        
+        .material-design:hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.08);
+        }
+                /* 9. Bouncing Notification */
+                .bouncing-notification {
+            position: relative;
+            overflow: hidden;
+        }
+        .bouncing-notification::after {
+            content: "New";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+        
+        .neon-glow {
+            border: 1px solid #00f7ff;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            from { box-shadow: 0 0 10px rgba(0, 247, 255, 0.5); }
+            to { box-shadow: 0 0 20px rgba(0, 247, 255, 0.8); }
+        }
 
 #contact {
   background: #f8f9fa;
@@ -190,7 +529,6 @@ button:hover {
                 color: blue;
                 width:620px;
                 text-align: center;
-
                 font-family: Algerian, Geneva, Tahoma, sans-serif;
                 border: 6px solid green ;
                 border-radius: 100px;
@@ -220,6 +558,7 @@ button:hover {
            } 
            .A{
                font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+               color: black;
            }
            .cursive{
                font-family: cursive;
@@ -307,8 +646,23 @@ button:hover {
         <title>Movies</title>
     </head>
 <body>
+  <div class="navbar" style='border-radius:100px;'>
+    <div class="social-icons">
+      <a href="#"><img src="./Twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="./RSR.png" alt="RSS"></a>
+      <a href="#"><img src="./instagram.png" alt="Instagram"></a>
+      <a href="#"><img src="./google.png" alt="Google+"></a>
+      <a href="#"><img src="./facebook.png" alt="Facebook"></a>
+    </div>
+    <div class="nav-links">
+      <a href="#">خانه</a>
+      <a href="#">انجمن</a>
+      <a href="#">تبلیغات</a>
+      <a href="#">تماس با ما</a>
+    </div>
+  </div>
 <center>
-    <div style="background-color: lightskyblue;padding: 50px;">
+    <div style="background-color: rgb(135, 250, 150);padding: 50px;border-radius: 10px;">
     <h1 id="C" style="text-align: center;"  >Best Movies According to Meysam</h1>
     <h2  class="" style="font-family: cursive;">My top movies of all-time.</h2></div>
     <hr class="dna-hr" >
@@ -872,7 +1226,128 @@ button:hover {
                                               <a style="font-size: larger;color: rgb(255, 255, 255);" href="">Episode eight</a>
                                               
                                               </div>
-    <section id="contact" >
+<br>
+<hr class="hologrid-hr">
+<br>
+
+<div class="download-holder minimal-card" style="width: 700px;">
+  <h3 class="download-title"style="color:blue;">Minimal Design File</h3>
+  <p class="download-description">A clean and simple download card with subtle accent border</p>
+  <a href="#" class="download-button">Download</a>
+  <div class="file-info">
+      <span><i>📁</i> PDF, 2.4MB</span>
+      <span><i>📅</i> Updated today</span>
+  </div>
+</div>
+<br>
+<div class="download-holder neon-glow"style="width: 700px;">
+  <h3 class="download-title"style="color:blue;">Neon Glow File</h3>
+  <p class="download-description">Pulsing neon effect for a futuristic look</p>
+  <a href="#" class="download-button">Download</a>
+  <div class="file-info">
+      <span><i>📁</i> MP4, 24.5MB</span>
+      <span><i>📅</i> Updated yesterday</span>
+  </div>
+</div>
+<br>
+<div class="download-holder floating-card"style="width: 700px;">
+  <h3 class="download-title"style="color:blue;">Floating Card File</h3>
+  <p class="download-description">Gently floats up and down to draw attention</p>
+  <a href="#" class="download-button">Download</a>
+  <div class="file-info">
+      <span><i>📁</i> EXE, 12.8MB</span>
+      <span><i>📅</i> Updated 1 week ago</span>
+  </div>
+</div>
+<br>
+<div class="download-holder material-design"style="width: 700px;">
+  <h3 class="download-title" style="color:blue;">Material Design File</h3>
+  <p class="download-description">Google Material Design with elegant hover effect</p>
+  <a href="#" class="download-button">Download</a>
+  <div class="file-info">
+      <span><i>📁</i> PSD, 15.3MB</span>
+      <span><i>📅</i> Updated 5 days ago</span>
+  </div>
+</div>
+<br>
+<div class="download-holder bouncing-notification"style="width: 700px;">
+  <h3 class="download-title"style="color:blue;">Bouncing Notification File</h3>
+  <p class="download-description">New file indicator with bouncing animation</p>
+  <a href="#" class="download-button">Download</a>
+  <div class="file-info">
+      <span><i>📁</i> PNG, 0.8MB</span>
+      <span><i>📅</i> Updated just now</span>
+  </div>
+</div>
+<br>
+<hr class="hologrid-hr">
+<br>
+<div class="question-container">
+  <h2>What is the capital of France?</h2>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="option" value="Paris" onclick="checkAnswer(this.value)" />
+      Paris
+    </label>
+    <label class="option">
+      <input type="radio" name="option" value="London" onclick="checkAnswer(this.value)" />
+      London
+    </label>
+    <label class="option">
+      <input type="radio" name="option" value="Berlin" onclick="checkAnswer(this.value)" />
+      Berlin
+    </label>
+    <label class="option">
+      <input type="radio" name="option" value="Rome" onclick="checkAnswer(this.value)" />
+      Rome
+    </label>
+  </div>
+  <div id="result" class="result"></div>
+</div>
+
+<script>
+  function checkAnswer(selected) {
+    const resultDiv = document.getElementById("result");
+    // Check if the answer is correct
+    if(selected === "Paris") {
+      resultDiv.textContent = "Correct! Paris is the capital of France.";
+      resultDiv.style.color = "#28a745"; // green for correct
+    } else {
+      resultDiv.textContent = "Incorrect. The correct answer is Paris.";
+      resultDiv.style.color = "#dc3545"; // red for incorrect
+    }
+    resultDiv.classList.add("show");
+  }
+</script>
+<br>y
+<div class="container">
+  <!-- Question 1 -->
+  <div class="question-box">
+      <div class="question-text">
+          <span class="question-number">1</span>
+          What is the capital city of France?
+      </div>
+      <div class="options-grid">
+          <div class="option">
+              <span class="option-label">A</span>
+              <span class="option-text">London</span>
+          </div>
+          <div class="option">
+              <span class="option-label">B</span>
+              <span class="option-text">Paris</span>
+          </div>
+          <div class="option">
+              <span class="option-label">C</span>
+              <span class="option-text">Berlin</span>
+          </div>
+          <div class="option">
+              <span class="option-label">D</span>
+              <span class="option-text">Madrid</span>
+          </div>
+      </div>
+  </div>
+
+    <section id="contact"  >
       <h2 >Get in Touch</h2>
       
       <div class="social-links">
@@ -890,28 +1365,41 @@ button:hover {
 
       <form action="https://formspree.io/f/{your-form-id}" method="POST">
         <div class="form-group">
-          <label for="name">Name:</label>
+          <label for="name" style="color: blue;">Name:</label>
           <input type="text" id="name" name="name" required>
         </div>
         
         <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="email" style="color: blue;">Email:</label>
           <input type="email" id="email" name="_replyto" required>
         </div>
         
         <div class="form-group">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+          <label for="message" style="color: blue;">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
         </div>
         
         <button type="submit">Send Message</button>
       </form>
     </section>
-    
+    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙</button>
 
-
-
-
+    <script>
+      function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+  
+        // Save preference in local storage
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("darkMode", "enabled");
+        } else {
+          localStorage.setItem("darkMode", "disabled");
+        }
+      }
+      // Load preference from local storage
+      if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+      }
+    </script>
 </center>
 </body>
 </html>
